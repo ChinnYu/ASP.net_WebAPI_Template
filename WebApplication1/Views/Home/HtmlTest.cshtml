@@ -1,0 +1,33 @@
+﻿@using System.Web.UI.WebControls
+@* @model List<WebApplication1.Models.Person> *@
+@model WebApplication1.Models.Person
+
+@{
+    ViewBag.Title = "HtmlTest";
+    // Layout = "_Layout";
+}
+
+<h2>title</h2>
+<a href="/Home/Index">超鏈結</a>
+<a href="@Url.Action("Index","Home")">超鏈結2</a>
+@Html.ActionLink("超鏈結3","Index","Home")
+@Html.Raw("1");
+@{
+    string temp1 = "<b>123</b>";
+}
+@Html.Encode(temp1)
+
+@using (Html.BeginForm("Show", "Home", FormMethod.Post))
+{
+    @Html.TextBox("uname")
+    @Html.DropDownList("ddList")
+    <input type="submit"/>
+}
+
+@ViewData["zhh"]
+@ViewData["qq"]
+<hr/>
+@using (Html.BeginForm("Show1", "Home1", FormMethod.Post))
+{
+    @Html.TextBoxFor(c=>c.Qq)
+}

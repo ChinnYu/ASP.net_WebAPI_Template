@@ -1,0 +1,32 @@
+﻿@using WebApplication1.Models
+@model WebApplication1.Models.Person1
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>title</title>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    
+</head>
+<body>
+<div>
+      @using (Html.BeginForm("Add","Person1",FormMethod.Post))
+      {
+          @Html.TextBoxFor(p=>p.Id1)
+          @Html.ValidationMessageFor(p=>p.Id1)
+          <br/>
+          @Html.TextBoxFor(p=>p.Name)
+          <br/>
+          <input type="submit" value="添加"/>
+      }
+      
+      
+</div>
+</body>
+</html>

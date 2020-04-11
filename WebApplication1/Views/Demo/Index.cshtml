@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    // Layout = "_Layout";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>title</title>
+</head>
+<body>
+<div>
+      <h2>title</h2>
+      <a href="@Url.Action("Add","Demo")?id=1">123</a>
+      @using (Html.BeginForm("Add", "Demo", FormMethod.Post))
+      {
+          @Html.TextBox("id")
+          <br/>
+          <input type="submit"/>
+      }
+      <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+      <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+      <script>
+          $(function() {
+            $('#btnAdd').click(function() {
+              $.post(
+                  '@Url.Action("CalcAdd","Demo")',
+                  $('#form1').serialize(),
+                  function(msg) {
+                    $('#sum').val(msg);
+                  }
+              );
+            });
+          });
+          
+          function Success(obj) {
+            $('#result').val(obj.Sum);
+          }
+      </script>
+      <form id="form1">
+          <input type="text" name="calc1"/>+
+          <input type="text" name="calc2"/>
+          <input type="button" id="btnAdd" value="加"/>
+          <input type="text" id="sum" value=""/>
+      </form>
+      
+      @using (Ajax.BeginForm("CalcAdd1", "Demo", new AjaxOptions()
+      {//記得引<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+          OnSuccess = "Success"
+      }))
+      {
+          <input type="text" name="calc1"/>
+          <span>+</span>
+          <input type="text" name="calc2"/>
+          <input type="submit" value="="/>
+          <input type="text" id="result"/>
+      }
+</div>
+</body>
+</html>
